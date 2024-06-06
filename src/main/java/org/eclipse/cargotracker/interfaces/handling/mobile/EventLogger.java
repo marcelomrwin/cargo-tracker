@@ -1,15 +1,5 @@
 package org.eclipse.cargotracker.interfaces.handling.mobile;
 
-import static java.util.stream.Collectors.toMap;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -32,6 +22,13 @@ import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
 import org.primefaces.event.FlowEvent;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toMap;
 
 @Named
 @ViewScoped

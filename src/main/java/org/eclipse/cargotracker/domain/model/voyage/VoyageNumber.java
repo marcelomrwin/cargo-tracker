@@ -1,10 +1,11 @@
 package org.eclipse.cargotracker.domain.model.voyage;
 
-import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotEmpty;
 import org.apache.commons.lang3.Validate;
+
+import java.io.Serializable;
 
 @Embeddable
 public class VoyageNumber implements Serializable {

@@ -1,7 +1,5 @@
 package org.eclipse.cargotracker.domain.model.handling;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
@@ -13,6 +11,9 @@ import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @ApplicationScoped
 public class HandlingEventFactory implements Serializable {

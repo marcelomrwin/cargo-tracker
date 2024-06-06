@@ -1,11 +1,12 @@
 package org.eclipse.cargotracker.interfaces.booking.facade;
 
-import java.time.LocalDate;
-import java.util.List;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.CargoStatus;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.Location;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * This facade shields the domain layer - model, services, repositories - from concerns about such

@@ -1,6 +1,5 @@
 package org.eclipse.cargotracker.application;
 
-import java.time.LocalDateTime;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
@@ -8,6 +7,8 @@ import org.eclipse.cargotracker.domain.model.handling.CannotCreateHandlingEventE
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
+
+import java.time.LocalDateTime;
 
 public interface HandlingEventService {
 

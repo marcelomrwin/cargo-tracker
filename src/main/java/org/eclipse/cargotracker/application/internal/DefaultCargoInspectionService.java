@@ -1,7 +1,5 @@
 package org.eclipse.cargotracker.application.internal;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import org.eclipse.cargotracker.application.ApplicationEvents;
@@ -11,6 +9,7 @@ import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEventRepository;
 import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
+import org.slf4j.Logger;
 
 @Stateless
 public class DefaultCargoInspectionService implements CargoInspectionService {
@@ -25,7 +24,7 @@ public class DefaultCargoInspectionService implements CargoInspectionService {
     Cargo cargo = cargoRepository.find(trackingId);
 
     if (cargo == null) {
-      logger.log(Level.WARNING, "Can't inspect non-existing cargo {0}", trackingId);
+      logger.info("Can't inspect non-existing cargo {}", trackingId);
       return;
     }
 

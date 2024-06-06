@@ -1,7 +1,5 @@
 package org.eclipse.cargotracker.domain.model.cargo;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -12,6 +10,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.shared.AbstractSpecification;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Route specification. Describes where a cargo origin and destination is, and the arrival deadline.

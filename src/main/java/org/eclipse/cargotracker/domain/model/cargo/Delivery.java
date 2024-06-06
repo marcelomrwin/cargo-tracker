@@ -1,25 +1,6 @@
 package org.eclipse.cargotracker.domain.model.cargo;
 
-import static org.eclipse.cargotracker.domain.model.cargo.RoutingStatus.MISROUTED;
-import static org.eclipse.cargotracker.domain.model.cargo.RoutingStatus.NOT_ROUTED;
-import static org.eclipse.cargotracker.domain.model.cargo.RoutingStatus.ROUTED;
-import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.CLAIMED;
-import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.IN_PORT;
-import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.NOT_RECEIVED;
-import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.ONBOARD_CARRIER;
-import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.UNKNOWN;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Iterator;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -29,6 +10,14 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingHistory;
 import org.eclipse.cargotracker.domain.model.location.Location;
 import org.eclipse.cargotracker.domain.model.voyage.Voyage;
 import org.eclipse.cargotracker.domain.shared.DomainObjectUtils;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Iterator;
+
+import static org.eclipse.cargotracker.domain.model.cargo.RoutingStatus.*;
+import static org.eclipse.cargotracker.domain.model.cargo.TransportStatus.*;
 
 /**
  * The actual transportation of the cargo, as opposed to the customer requirement

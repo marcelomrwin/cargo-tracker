@@ -1,7 +1,7 @@
 package org.eclipse.cargotracker.application;
 
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;

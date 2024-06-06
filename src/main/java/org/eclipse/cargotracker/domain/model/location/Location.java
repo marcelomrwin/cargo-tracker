@@ -1,14 +1,11 @@
 package org.eclipse.cargotracker.domain.model.location;
 
-import java.io.Serializable;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.lang3.Validate;
+
+import java.io.Serializable;
 
 /**
  * A location in our model is stops on a journey, such as cargo origin or destination, or carrier

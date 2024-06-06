@@ -1,6 +1,5 @@
 package org.eclipse.cargotracker.interfaces.handling.rest;
 
-import java.time.LocalDateTime;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -15,6 +14,8 @@ import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
+
+import java.time.LocalDateTime;
 
 /**
  * This REST end-point implementation performs basic validation and parsing of incoming data, and in

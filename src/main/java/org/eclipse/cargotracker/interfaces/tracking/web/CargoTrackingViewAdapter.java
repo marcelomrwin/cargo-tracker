@@ -1,9 +1,5 @@
 package org.eclipse.cargotracker.interfaces.tracking.web;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import org.eclipse.cargotracker.application.util.DateConverter;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.Delivery;
@@ -11,6 +7,11 @@ import org.eclipse.cargotracker.domain.model.cargo.HandlingActivity;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.Coordinates;
 import org.eclipse.cargotracker.interfaces.CoordinatesFactory;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /** View adapter for displaying a cargo in a tracking context. */
 public class CargoTrackingViewAdapter {

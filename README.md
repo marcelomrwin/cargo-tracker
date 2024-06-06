@@ -158,3 +158,8 @@ For further guidance on contributing including the project roadmap, please look 
   can do this by simply removing the cargo-tracker-data directory from the file
   system and restarting the application. This directory will typically be under $your-payara-installation/glassfish/domains/domain1/config.
 * While running with Open Liberty, you will notice a number of spurious errors. You will see shrinkwrap features warnings, message-driven bean warnings, the AggregateObjectMapping nested foreign key warning, I/O errors, etc. You can safely ignore these. They don't affect the application functionality.
+
+## Wildfly
+```shell
+mvn clean package -DskipTests wildfly:undeploy wildfly:deploy -Pwildfly
+```

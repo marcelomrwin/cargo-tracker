@@ -1,8 +1,5 @@
 package org.eclipse.cargotracker.infrastructure.messaging.jms;
 
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,6 +9,9 @@ import org.eclipse.cargotracker.application.ApplicationEvents;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
+import org.slf4j.Logger;
+
+import java.io.Serializable;
 
 @ApplicationScoped
 public class JmsApplicationEvents implements ApplicationEvents, Serializable {
@@ -37,7 +37,7 @@ public class JmsApplicationEvents implements ApplicationEvents, Serializable {
   @Override
   public void cargoWasHandled(HandlingEvent event) {
     Cargo cargo = event.getCargo();
-    logger.log(Level.INFO, "Cargo was handled {0}", cargo);
+    logger.info("Cargo was handled {}", cargo);
     jmsContext
         .createProducer()
         .setPriority(LOW_PRIORITY)
@@ -48,7 +48,7 @@ public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
   @Override
   public void cargoWasMisdirected(Cargo cargo) {
-    logger.log(Level.INFO, "Cargo was misdirected {0}", cargo);
+    logger.info("Cargo was misdirected {}", cargo);
     jmsContext
         .createProducer()
         .setPriority(LOW_PRIORITY)
@@ -59,7 +59,7 @@ public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
   @Override
   public void cargoHasArrived(Cargo cargo) {
-    logger.log(Level.INFO, "Cargo has arrived {0}", cargo);
+    logger.info("Cargo has arrived {}", cargo);
     jmsContext
         .createProducer()
         .setPriority(LOW_PRIORITY)
@@ -70,7 +70,7 @@ public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
   @Override
   public void receivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt) {
-    logger.log(Level.INFO, "Received handling event registration attempt {0}", attempt);
+    logger.info("Received handling event registration attempt {}", attempt);
     jmsContext
         .createProducer()
         .setPriority(LOW_PRIORITY)

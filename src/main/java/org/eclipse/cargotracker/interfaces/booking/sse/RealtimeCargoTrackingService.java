@@ -1,7 +1,5 @@
 package org.eclipse.cargotracker.interfaces.booking.sse;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.ejb.Singleton;
@@ -19,6 +17,7 @@ import jakarta.ws.rs.sse.SseEventSink;
 import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
+import org.slf4j.Logger;
 
 /** Sever-sent events service for tracking all cargo in real time. */
 @Singleton
@@ -34,7 +33,7 @@ public class RealtimeCargoTrackingService {
   @PostConstruct
   public void init() {
     broadcaster = sse.newBroadcaster();
-    logger.log(Level.FINEST, "SSE broadcaster created.");
+    logger.info( "SSE broadcaster created.");
   }
 
   @GET
@@ -43,17 +42,17 @@ public class RealtimeCargoTrackingService {
     cargoRepository.findAll().stream().map(this::cargoToSseEvent).forEach(eventSink::send);
 
     broadcaster.register(eventSink);
-    logger.log(Level.FINEST, "SSE event sink registered.");
+    logger.info("SSE event sink registered.");
   }
 
   @PreDestroy
   public void close() {
     broadcaster.close();
-    logger.log(Level.FINEST, "SSE broadcaster closed.");
+    logger.info("SSE broadcaster closed.");
   }
 
   public void onCargoUpdated(@ObservesAsync @CargoUpdated Cargo cargo) {
-    logger.log(Level.FINEST, "SSE event broadcast for cargo: {0}", cargo);
+    logger.info("SSE event broadcast for cargo: {}", cargo);
     broadcaster.broadcast(cargoToSseEvent(cargo));
   }
 

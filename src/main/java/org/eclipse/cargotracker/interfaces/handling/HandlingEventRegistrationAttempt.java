@@ -1,11 +1,12 @@
 package org.eclipse.cargotracker.interfaces.handling;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * This is a simple transfer object for passing incoming handling event registration attempts to the

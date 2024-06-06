@@ -1,13 +1,14 @@
 package org.eclipse.cargotracker.application;
 
-import java.time.LocalDate;
-import java.util.List;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import org.eclipse.cargotracker.domain.model.cargo.Itinerary;
 import org.eclipse.cargotracker.domain.model.cargo.TrackingId;
 import org.eclipse.cargotracker.domain.model.location.UnLocode;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /** Cargo booking service. */
 public interface BookingService {

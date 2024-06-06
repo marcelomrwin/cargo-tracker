@@ -1,12 +1,8 @@
 package org.eclipse.cargotracker.domain.model.handling;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
 import org.apache.commons.lang3.Validate;
+
+import java.util.*;
 
 public class HandlingHistory {
 

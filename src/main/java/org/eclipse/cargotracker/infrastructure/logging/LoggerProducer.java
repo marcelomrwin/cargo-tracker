@@ -1,10 +1,12 @@
 package org.eclipse.cargotracker.infrastructure.logging;
 
-import java.io.Serializable;
-import java.util.logging.Logger;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
 
 @ApplicationScoped
 public class LoggerProducer implements Serializable {
@@ -15,7 +17,7 @@ public class LoggerProducer implements Serializable {
   public Logger produceLogger(InjectionPoint injectionPoint) {
     String loggerName = extractLoggerName(injectionPoint);
 
-    return Logger.getLogger(loggerName);
+    return LoggerFactory.getLogger(loggerName);
   }
 
   private String extractLoggerName(InjectionPoint injectionPoint) {

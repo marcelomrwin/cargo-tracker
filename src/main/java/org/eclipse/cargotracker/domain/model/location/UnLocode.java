@@ -1,10 +1,11 @@
 package org.eclipse.cargotracker.domain.model.location;
 
-import java.io.Serializable;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import org.apache.commons.lang3.Validate;
+
+import java.io.Serializable;
 
 /**
  * United nations location code.

@@ -1,19 +1,16 @@
 package org.eclipse.cargotracker.domain.model.cargo;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OrderColumn;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.Validate;
 import org.eclipse.cargotracker.domain.model.handling.HandlingEvent;
 import org.eclipse.cargotracker.domain.model.location.Location;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Embeddable
 public class Itinerary implements Serializable {
@@ -24,7 +21,7 @@ public class Itinerary implements Serializable {
   public static final Itinerary EMPTY_ITINERARY = new Itinerary();
 
   // TODO [Clean Code] Look into why cascade delete doesn't work.
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
   @JoinColumn(name = "cargo_id")
   @OrderColumn(name = "leg_order")
   @Size(min = 1)
