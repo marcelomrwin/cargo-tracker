@@ -52,6 +52,11 @@
         <welcome-file>index.xhtml</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
     <!-- Application resource dependencies like JMS queues and data sources are still
       good candidates for XML, as is application configuration. -->
     <env-entry>

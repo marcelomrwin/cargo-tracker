@@ -15,9 +15,10 @@
         <h:panelGrid columns="1" styleClass="registrationPanelGrid"
           style="margin: 0 auto;">
           <p:calendar id="deadline" value="#{booking.arrivalDeadline}"
-            mindate="#{booking.today}" mode="inline" pattern="yyyy-MM-dd">
+            mindate="#{booking.today}" mode="inline" >
             <p:ajax event="dateSelect" listener="#{booking.deadlineUpdated}" />
           </p:calendar>
+
         </h:panelGrid>
         <h:panelGrid columns="1" id="durationPanel"
           styleClass="registrationPanelGrid" style="margin: 0 auto;">

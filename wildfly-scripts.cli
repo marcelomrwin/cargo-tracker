@@ -1,0 +1,10 @@
+/subsystem=metrics:remove()
+/extension=org.wildfly.extension.metrics:remove()
+
+/extension=org.wildfly.extension.micrometer:add
+/subsystem=micrometer:add(endpoint="http://${OTEL_COLLECTOR_HOST:localhost}:4318/v1/metrics",step="1")
+
+/extension=org.wildfly.extension.microprofile.openapi-smallrye:add()
+/subsystem=microprofile-openapi-smallrye:add()
+
+reload

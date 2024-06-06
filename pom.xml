@@ -30,9 +30,14 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- Arquillian Bill Of Management used to reduce collision between testing
-            dependencies. Using a dependency manager we don't need to specify the version of
-            each Arquillian dependency. -->
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-bom</artifactId>
+                <version>1.38.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -56,6 +61,23 @@
             <version>${jakartaee-api.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.12.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.eclipse.microprofile.openapi</groupId>-->
+<!--            <artifactId>microprofile-openapi-api</artifactId>-->
+<!--            <version>3.1.1</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
         <!-- The third-party dependencies this application has -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -77,6 +99,15 @@
             <artifactId>logback-classic</artifactId>
             <version>1.5.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>6.1</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -528,6 +559,9 @@
                         <version>5.0.0.Final</version>
                         <configuration>
                             <serverConfig>standalone-full.xml</serverConfig>
+                            <scripts>
+                                <script>wildfly-scripts.cli</script>
+                            </scripts>
                         </configuration>
                         <executions>
                             <execution>

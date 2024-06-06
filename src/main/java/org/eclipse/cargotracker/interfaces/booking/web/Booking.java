@@ -1,5 +1,10 @@
 package org.eclipse.cargotracker.interfaces.booking.web;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -9,12 +14,6 @@ import jakarta.inject.Named;
 import org.eclipse.cargotracker.interfaces.booking.facade.BookingServiceFacade;
 import org.eclipse.cargotracker.interfaces.booking.facade.dto.Location;
 import org.primefaces.PrimeFaces;
-
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles booking cargo. Operates against a dedicated service facade, and could easily be rewritten
@@ -53,8 +52,6 @@ public class Booking implements Serializable {
   public void init() {
     today = LocalDate.now();
     locations = bookingServiceFacade.listShippingLocations();
-
-    System.out.println("INIT today :"+today+" arrivalDeadline: "+arrivalDeadline);
   }
 
   public List<Location> getLocations() {
@@ -122,12 +119,10 @@ public class Booking implements Serializable {
   }
 
   public LocalDate getArrivalDeadline() {
-    System.out.println("getArrivalDeadline today :"+today+" arrivalDeadline: "+arrivalDeadline);
     return arrivalDeadline;
   }
 
   public void setArrivalDeadline(LocalDate arrivalDeadline) {
-    System.out.println("setArrivalDeadline today :"+today+" arrivalDeadline: "+arrivalDeadline + "this.arrivalDeadline: "+this.arrivalDeadline);
     this.arrivalDeadline = arrivalDeadline;
   }
 
@@ -140,7 +135,6 @@ public class Booking implements Serializable {
   }
 
   public void deadlineUpdated() {
-    System.out.println("deadlineUpdated today :"+today+" arrivalDeadline: "+arrivalDeadline + "this.arrivalDeadline: "+this.arrivalDeadline);
     duration = ChronoUnit.DAYS.between(today, arrivalDeadline);
 
     if (duration >= MIN_JOURNEY_DURATION) {

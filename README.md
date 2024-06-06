@@ -160,6 +160,13 @@ For further guidance on contributing including the project roadmap, please look 
 * While running with Open Liberty, you will notice a number of spurious errors. You will see shrinkwrap features warnings, message-driven bean warnings, the AggregateObjectMapping nested foreign key warning, I/O errors, etc. You can safely ignore these. They don't affect the application functionality.
 
 ## Wildfly
+
+https://docs.wildfly.org/32/Admin_Guide.html#Micrometer_Metrics
+https://docs.wildfly.org/quickstart/micrometer/README.html
+
 ```shell
+podman compose down && podman compose up -d
 mvn clean package -DskipTests wildfly:undeploy wildfly:deploy -Pwildfly
+curl -X GET http://localhost:8080/cargo-tracker/rest/cargo/list
+http://localhost:8080/openapi?format=JSON
 ```

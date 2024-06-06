@@ -16,6 +16,8 @@ import org.eclipse.cargotracker.domain.model.location.UnLocode;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageNumber;
 import org.eclipse.cargotracker.domain.model.voyage.VoyageRepository;
 import org.eclipse.cargotracker.domain.service.RoutingService;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.pathfinder.api.TransitEdge;
 import org.eclipse.pathfinder.api.TransitPath;
 import org.slf4j.Logger;
@@ -53,6 +55,8 @@ public class ExternalRoutingService implements RoutingService {
     }
 
     @Override
+    @Timeout(value = 3000)
+    @Retry(maxRetries = 3, delay = 500)
     public List<Itinerary> fetchRoutesForSpecification(RouteSpecification routeSpecification) {
         // The RouteSpecification is picked apart and adapted to the external API.
         String origin = routeSpecification.getOrigin().getUnLocode().getIdString();

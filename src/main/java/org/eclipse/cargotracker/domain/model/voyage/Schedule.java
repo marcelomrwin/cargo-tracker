@@ -20,7 +20,7 @@ public class Schedule implements Serializable {
   public static final Schedule EMPTY = new Schedule();
 
   // TODO [Clean Code] Look into why cascade delete doesn't work.
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL/*,fetch = FetchType.EAGER*/)
   @JoinColumn(name = "voyage_id")
   @OrderColumn(name = "movement_order")
   @NotNull
