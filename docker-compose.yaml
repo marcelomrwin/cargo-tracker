@@ -1,6 +1,8 @@
 services:
-  otel-collector:
+  collector:
+    container_name: collector
     image: otel/opentelemetry-collector
+    restart: always
     command: [--config=/etc/otel-collector-config.yaml]
     volumes:
       - ./prometheus/otel-collector-config.yaml:/etc/otel-collector-config.yaml:Z
@@ -9,21 +11,26 @@ services:
       - 8888:8888 # Prometheus metrics exposed by the collector
       - 8889:8889 # Prometheus exporter metrics
       - 13133:13133 # health_check extension
-      - 4317:4317 # OTLP gRPC receiver
       - 4318:4318 # OTLP http receiver
       - 55679:55679 # zpages extension
-      - 1234:1234 # /metrics endpoint
+    environment:
+      TZ: Europe/Madrid
 
   prometheus:
     image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:Z
     ports:
       - "9090:9090"
     depends_on:
-      - otel-collector
+      - collector
+    environment:
+      TZ: Europe/Madrid
 
   grafana:
+    container_name: grafana
     image: grafana/grafana:latest
     ports:
       - "3000:3000"
@@ -31,4 +38,48 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/mydashboards:/var/lib/grafana/dashboards
     depends_on:
-      - prometheus
+      - collector
+    environment:
+      TZ: Europe/Madrid
+
+  postgres:
+    image: docker.io/library/postgres:16
+    container_name: rhbk-postgres
+    hostname: rhbk-postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - TZ=Europe/Madrid
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
+
+  keycloak:
+    image: registry.redhat.io/rhbk/keycloak-rhel9:24-8
+    container_name: keycloak-24.8
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - 8180:8080
+      - 8543:8443
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - ./kc_data:/opt/keycloak/data
+    environment:
+      DEBUG_PORT: '*:8787'
+      TZ: Europe/Madrid
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_LOG: console,file
+      KC_LOG_LEVEL: INFO,org.keycloak.transaction:warn,org.keycloak.services.scheduled:warn,org.hibernate:info,org.infinispan.protostream:info
+      KC_LOG_FILE: /opt/keycloak/data/logs/keycloak.log
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: password
+      KC_FEATURES: token-exchange,client-secret-rotation,step-up-authentication,docker,admin-fine-grained-authz

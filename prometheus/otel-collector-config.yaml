@@ -8,7 +8,6 @@ extensions:
 receivers:
   otlp:
     protocols:
-      grpc:
       http:
 
 processors:
@@ -16,13 +15,18 @@ processors:
 
 exporters:
   prometheus:
-    endpoint: "0.0.0.0:1234"
+    endpoint: "0.0.0.0:8889"
+    const_labels:
+      label1: value1
+
+#  debug:
 
 service:
+  extensions: [health_check, pprof, zpages]
   pipelines:
     metrics:
       receivers: [otlp]
       processors: [batch]
       exporters: [prometheus]
 
-  extensions: [health_check, pprof, zpages]
+
