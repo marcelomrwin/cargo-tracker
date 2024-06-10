@@ -9,4 +9,7 @@
 
 /subsystem=undertow:write-attribute(name=statistics-enabled,value=true)
 
+/extension=org.wildfly.extension.microprofile.fault-tolerance-smallrye:add()
+/subsystem=microprofile-fault-tolerance-smallrye:add()
+
 reload

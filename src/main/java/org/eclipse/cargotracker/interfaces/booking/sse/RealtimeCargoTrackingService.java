@@ -22,8 +22,6 @@ import org.eclipse.cargotracker.domain.model.cargo.Cargo;
 import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 import org.eclipse.cargotracker.infrastructure.rest.MetricCounterInterceptor;
-import org.eclipse.microprofile.metrics.annotation.Counted;
-import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.slf4j.Logger;
 

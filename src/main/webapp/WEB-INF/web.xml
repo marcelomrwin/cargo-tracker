@@ -53,6 +53,25 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <!-- Security -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>OIDC</auth-method>
+    </login-config>
+
+    <security-role>
+        <role-name>*</role-name>
+    </security-role>
+
     <error-page>
         <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
         <location>/index.xhtml</location>

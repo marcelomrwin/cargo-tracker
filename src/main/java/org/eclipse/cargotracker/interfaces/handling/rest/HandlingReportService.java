@@ -1,5 +1,6 @@
 package org.eclipse.cargotracker.interfaces.handling.rest;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -31,6 +32,7 @@ public class HandlingReportService {
   @POST
   @Path("/reports")
   @Consumes({"application/json", "application/xml"})
+  @RolesAllowed("CAN_HANDLING")
   public void submitReport(
       @NotNull(message = "Missing handling report.") @Valid HandlingReport handlingReport) {
     LocalDateTime completionTime = DateConverter.toDateTime(handlingReport.getCompletionTime());

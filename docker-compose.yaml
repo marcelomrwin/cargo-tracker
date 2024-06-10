@@ -69,7 +69,8 @@ services:
       - start-dev
       - --import-realm
     volumes:
-      - ./kc_data:/opt/keycloak/data
+      - ./kc_data/logs:/opt/keycloak/data/logs
+      - ./keycloak/realms:/opt/keycloak/data/import
     environment:
       DEBUG_PORT: '*:8787'
       TZ: Europe/Madrid

@@ -159,14 +159,24 @@ For further guidance on contributing including the project roadmap, please look 
   system and restarting the application. This directory will typically be under $your-payara-installation/glassfish/domains/domain1/config.
 * While running with Open Liberty, you will notice a number of spurious errors. You will see shrinkwrap features warnings, message-driven bean warnings, the AggregateObjectMapping nested foreign key warning, I/O errors, etc. You can safely ignore these. They don't affect the application functionality.
 
-## Wildfly
+## References
 
 https://docs.wildfly.org/32/Admin_Guide.html#Micrometer_Metrics
 https://docs.wildfly.org/quickstart/micrometer/README.html
+https://auth0.com/blog/jakarta-ee-oidc/
+https://www.wildfly.org/guides/security-oidc-openshift
 
 ```shell
 podman compose down && podman compose up -d
 mvn clean package -DskipTests wildfly:undeploy wildfly:deploy -Pwildfly
 curl -X GET http://localhost:8080/cargo-tracker/rest/cargo/list
 http://localhost:8080/openapi?format=JSON
+```
+
+## Realm Export
+```shell
+podman ps
+podman exec -it keycloak-24.8 bash
+  cd /opt/keycloak/bin/
+  ./kc.sh export --dir /opt/keycloak/data/import --realm redhat --users realm_file
 ```
