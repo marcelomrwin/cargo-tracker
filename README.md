@@ -180,3 +180,20 @@ podman exec -it keycloak-24.8 bash
   cd /opt/keycloak/bin/
   ./kc.sh export --dir /opt/keycloak/data/import --realm redhat --users realm_file
 ```
+
+## Image quay.io
+```shell
+podman build -t quay.io/masales/wildfly-cargo-tracker .
+podman run --rm --name cargo-tracker -p 8080:8080 quay.io/masales/wildfly-cargo-tracker
+```
+
+## App Env Vars
+OIDC_CLIENT_ID
+OIDC_CLIENT_SECRET
+OIDC_PROVIDER_URL
+OIDC_REALM
+OIDC_RESOURCE
+OTEL_COLLECTOR_HOST
+
+### Keycloak user
+cargouser / password

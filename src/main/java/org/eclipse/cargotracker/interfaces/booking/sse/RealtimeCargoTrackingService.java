@@ -23,6 +23,8 @@ import org.eclipse.cargotracker.domain.model.cargo.CargoRepository;
 import org.eclipse.cargotracker.infrastructure.events.cdi.CargoUpdated;
 import org.eclipse.cargotracker.infrastructure.rest.MetricCounterInterceptor;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -53,7 +55,10 @@ public class RealtimeCargoTrackingService {
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     @MetricCounterInterceptor
-    @Operation(description = "List all cargo tracking")
+    @Operation(summary = "List all cargo tracking", description = "Lists all cargo including information about the origin, destination and last location of each cargo")
+    @APIResponseSchema(value = JsonArray.class,
+            responseDescription = "Essential information about tracked cargo",
+            responseCode = "200")
     public JsonArray getAllCargo() {
 
         List<Cargo> cargos = cargoRepository.findAll();
@@ -73,7 +78,8 @@ public class RealtimeCargoTrackingService {
                 .add("misdirected", cargo.getDelivery().isMisdirected())
                 .add("transportStatus", cargo.getDelivery().getTransportStatus().toString())
                 .add("atDestination", cargo.getDelivery().isUnloadedAtDestination())
-                .add("origin", cargo.getOrigin().getUnLocode().getIdString()).add("lastKnownLocation",
+                .add("origin", cargo.getOrigin().getUnLocode().getIdString())
+                .add("lastKnownLocation",
                         cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString().equals("XXXXX")
                                 ? "Unknown"
                                 : cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString());

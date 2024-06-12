@@ -1,0 +1,5 @@
+embed-server --admin-only=true --std-out=echo --server-config=standalone-full.xml
+
+run-batch --file=wildfly-scripts.cli
+
+stop-embedded-server

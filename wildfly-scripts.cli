@@ -1,15 +1,40 @@
+echo Removing the subsystem and extension for metrics
 /subsystem=metrics:remove()
 /extension=org.wildfly.extension.metrics:remove()
 
-/extension=org.wildfly.extension.micrometer:add
-/subsystem=micrometer:add(endpoint="http://${OTEL_COLLECTOR_HOST:localhost}:4318/v1/metrics",step="1")
+echo Adding the micrometer extension and subsystem
+#/extension=org.wildfly.extension.micrometer:add
+#/subsystem=micrometer:add(endpoint="http://${OTEL_COLLECTOR_HOST:localhost}:4318/v1/metrics",step="1",exposed-subsystems=*)
 
+if (outcome != success) of /extension=org.wildfly.extension.micrometer:read-resource
+    /extension=org.wildfly.extension.micrometer:add
+    /subsystem=micrometer:add()
+end-if
+/subsystem=logging/logger=io.micrometer.registry.otlp:add(level=ERROR)
+/subsystem=micrometer:write-attribute(name=endpoint, value="http://${OTEL_COLLECTOR_HOST:localhost}:4318/v1/metrics")
+/subsystem=micrometer:write-attribute(name="step",value="1")
+/subsystem=micrometer:write-attribute(name="exposed-subsystems",value=["*"])
+
+echo Adding openapi extension and subsystem
 /extension=org.wildfly.extension.microprofile.openapi-smallrye:add()
 /subsystem=microprofile-openapi-smallrye:add()
 
+echo Enabling undertow statistics
 /subsystem=undertow:write-attribute(name=statistics-enabled,value=true)
 
+echo Adding fault-tolerance extension and subsystem
 /extension=org.wildfly.extension.microprofile.fault-tolerance-smallrye:add()
 /subsystem=microprofile-fault-tolerance-smallrye:add()
+
+echo Adding health extension and subsystem
+/extension=org.wildfly.extension.microprofile.health-smallrye:add()
+/subsystem=microprofile-health-smallrye:add()
+
+
+if (outcome == success) of /deployment=ROOT.war:read-resource
+    echo Adjusting the redirection path
+    /subsystem=undertow/configuration=filter/rewrite=root-rewrite:add(target="/$${1}")
+    /subsystem=undertow/server=default-server/host=default-host/filter-ref=root-rewrite:add(predicate="regex('/cargo-tracker/(.*)')")
+end-if
 
 reload

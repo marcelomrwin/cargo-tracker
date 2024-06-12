@@ -1,15 +1,15 @@
 {
-  "client-id" : "cargotracker",
+  "client-id" : "${env.OIDC_CLIENT_ID:cargotracker}",
   "verify-token-audience": true,
   "credentials": {
-    "secret": "IAyww8lRxZwuZ1OxJjo39HXKQvObkbvv"
+    "secret": "${env.OIDC_CLIENT_SECRET:IAyww8lRxZwuZ1OxJjo39HXKQvObkbvv}"
   },
-  "provider-url" : "${env.OIDC_PROVIDER_URL:http://localhost:8180}/realms/redhat",
+  "provider-url" : "${env.OIDC_PROVIDER_URL:http://localhost:8180}/realms/${env.OIDC_REALM:redhat}",
   "public-client" : "false",
   "principal-attribute" : "preferred_username",
   "ssl-required" : "EXTERNAL",
   "confidential-port": 0,
-  "resource": "cargotracker",
-  "realm": "redhat",
-  "auth-server-url": "http://localhost:8180/"
+  "resource": "${env.OIDC_RESOURCE:cargotracker}",
+  "realm": "${env.OIDC_REALM:redhat}",
+  "auth-server-url": "${env.OIDC_PROVIDER_URL:http://localhost:8180}/"
 }
