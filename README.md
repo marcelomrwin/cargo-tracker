@@ -183,8 +183,13 @@ podman exec -it keycloak-24.8 bash
 
 ## Image quay.io
 ```shell
-podman build -t quay.io/masales/wildfly-cargo-tracker .
+podman pull quay.io/masales/wildfly-cargo-tracker
 podman run --rm --name cargo-tracker -p 8080:8080 quay.io/masales/wildfly-cargo-tracker
+```
+
+## Build image
+```shell
+podman build -t quay.io/masales/wildfly-cargo-tracker .
 ```
 
 ## App Env Vars
